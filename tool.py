@@ -90,10 +90,9 @@ def main():
         for filename, blob in obj.items():
             if in_enc:         # transcode filename if needed
                 filename = filename.decode(in_enc)
-            filename = key     # use entry name as filename
             if args.dir:
-                filename = os.path.join(args.dir, filename)
-            open(filename, 'wb').write(value)
+                filename = os.path.join(args.dir, filename.lstrip('\\'))
+            open(filename, 'wb').write(blob)
     elif args.dump and not is_mdd:
         # dump all resources in *.mdx into a CSV file
         newline = '\r\n'
